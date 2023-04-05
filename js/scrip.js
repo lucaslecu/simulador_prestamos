@@ -22,6 +22,8 @@ function calcularCuota6(monto) {
       this.telefono = telefono;
     }
   }
+
+  let clientes = [];
   
 
 let validacion = prompt("Buen dia esto es un simulador de prestamos necesitaria saber si trabajas en blanco pon si o no")
@@ -132,15 +134,15 @@ if (validacion =="no") {
             
         }
         else{
-        let nombre, apellido, edad, direccion, telefono, respuesta;
+        let nombre, apellido,edad, direccion, telefono, respuesta;
 
 do {
     alert("Tomaremos algunos datos para ponernos en contacto de su prestamo de "+monto)
   nombre = prompt("Ingrese su nombre");
   apellido = prompt("Ingrese su apellido");
-  edad = prompt("Ingrese su edad");
+  edad = Number (prompt ("Ingrese su edad"));
   direccion = prompt("Ingrese su dirección");
-  telefono = prompt("Ingrese su teléfono");
+  telefono =Number (prompt ("Ingrese su teléfono"));
 
   respuesta = prompt("Los datos ingresados son:\n" +
   "Nombre completo: " + nombre + " " + apellido + "\n" +
@@ -158,5 +160,6 @@ alert("Estos son sus datos:\n" +
   "Teléfono: " + telefono + "\n" +
   "Gracias por tomarse el tiempo de responder, lo contactaremos en breve.");
 
-let cliente = new Cliente(nombre, apellido, edad, direccion, telefono);
+  let nuevoCliente = new Cliente(nombre, apellido, edad, direccion, telefono);
+clientes.push(nuevoCliente);
 }}
