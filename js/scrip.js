@@ -1,3 +1,4 @@
+
 function calcularCuota3(monto) {
   const calculo = monto * 30 / 100;
   const cuotaTotal = (monto + calculo) / 3;
@@ -26,7 +27,7 @@ function calcularCuota6(monto) {
   let clientes = [];
   
 
-let validacion = prompt("Buen dia esto es un simulador de prestamos necesitaria saber si trabajas en blanco pon si o no")
+//let validacion = prompt("Buen dia esto es un simulador de prestamos necesitaria saber si trabajas en blanco pon si o no")
 
 if (validacion =="no") {
     alert("Lo lamento solo se pueden dar prestamos a personas que estan trabajando en blanco")
@@ -163,3 +164,23 @@ alert("Estos son sus datos:\n" +
   let nuevoCliente = new Cliente(nombre, apellido, edad, direccion, telefono);
 clientes.push(nuevoCliente);
 }}
+
+
+const formulario = document.getElementById('formulario');
+const resultadoDiv = document.getElementById('resultado');
+
+formulario.addEventListener('submit', (event) => {
+  event.preventDefault();
+  
+  const trabajo = document.getElementById('trabajo').value;
+  const empresa = document.getElementById('empresa').value;
+  const sueldo = document.getElementById('sueldo').value;
+
+  if(trabajo === "NO") {
+    resultadoDiv.innerHTML = "Lo siento, no se le puede otorgar el préstamo.";
+  } else {
+    resultadoDiv.innerHTML = `Trabaja en blanco: ${trabajo}<br>Empresa: ${empresa}<br>Sueldo: ${sueldo}`;
+  }
+});
+
+
