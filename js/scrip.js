@@ -1,4 +1,4 @@
-
+/*
 function calcularCuota3(monto) {
   const calculo = monto * 30 / 100;
   const cuotaTotal = (monto + calculo) / 3;
@@ -164,7 +164,7 @@ alert("Estos son sus datos:\n" +
   let nuevoCliente = new Cliente(nombre, apellido, edad, direccion, telefono);
 clientes.push(nuevoCliente);
 }}
-
+*/
 
 const formulario = document.getElementById('formulario');
 const resultadoDiv = document.getElementById('resultado');
