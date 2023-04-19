@@ -176,7 +176,7 @@ formulario.addEventListener('submit', (event) => {
   const empresa = document.getElementById('empresa').value;
   const sueldo = document.getElementById('sueldo').value;
 
-  if(trabajo === "NO") {
+  if(trabajo === "no") {
     resultadoDiv.innerHTML = "Lo siento, no se le puede otorgar el préstamo.";
   } else {
     resultadoDiv.innerHTML = `Trabaja en blanco: ${trabajo}<br>Empresa: ${empresa}<br>Sueldo: ${sueldo}`;
