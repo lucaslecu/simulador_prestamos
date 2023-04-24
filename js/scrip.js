@@ -168,6 +168,10 @@ clientes.push(nuevoCliente);
 
 const formulario = document.getElementById('formulario');
 const resultadoDiv = document.getElementById('resultado');
+const formulario2 = document.getElementById('formulario2');
+const montoSeleccionado = document.getElementById('monto_seleccionado');
+const cuotasSeleccionadas = document.getElementById('cuotas_seleccionadas');
+const resultadoDiv2 = document.getElementById('resultado2');
 
 formulario.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -179,8 +183,23 @@ formulario.addEventListener('submit', (event) => {
   if(trabajo === "no") {
     resultadoDiv.innerHTML = "Lo siento, no se le puede otorgar el préstamo.";
   } else {
-    resultadoDiv.innerHTML = `Trabaja en blanco: ${trabajo}<br>Empresa: ${empresa}<br>Sueldo: ${sueldo}`;
+    if (sueldo < 45000) {
+      resultadoDiv.innerHTML = "Disculpe, a montos menores a $45,000 no se puede otorgar un préstamo.";
+    } else if (sueldo >= 45000 && sueldo < 100000) {
+      formulario.style.display = 'none'; // Ocultar el primer formulario
+      formulario2.style.display = 'block'; // Mostrar el segundo formulario
+    }
   }
 });
 
+formulario2.addEventListener('submit', (event) => {
+  event.preventDefault();
+  
+  const monto = montoSeleccionado.value;
+  const cuotas = cuotasSeleccionadas.value;
+  const interes = 1.1; // Tasa de interés fija del 10% por cada cuota
 
+  const cuota = (monto * interes) / cuotas;
+  
+  resultadoDiv2.innerHTML = `Para un préstamo de $${monto} en ${cuotas} cuotas, cada cuota será de $${cuota.toFixed(2)}.`;
+});

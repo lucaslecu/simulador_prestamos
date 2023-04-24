@@ -36,12 +36,35 @@
 
         </div>
 
-        </div>
+        <div id="formulario2" style="display: none;">
+            <h2>Seleccione el monto y las cuotas:</h2>
 
+            <form>
+                <label for="">Seleccione el monto:</label>
+                <select name="monto" id="monto_seleccionado">
+                    <option value="5000">$5000</option>
+                    <option value="10000">$10000</option>
+                    <option value="20000">$20000</option>
+                </select>
+                <br>
+                <label for="">Seleccione las cuotas:</label>
+                <select name="cuotas" id="cuotas_seleccionadas">
+                    <option value="6">6 cuotas</option>
+                    <option value="12">12 cuotas</option>
+                    <option value="24">24 cuotas</option>
+                </select>
+                <div>
+                    <input type="submit" value="Calcular">
+                    <input type="reset" value="Limpiar">
+                </div>
+            </form>
+            <div id="resultado2"></div>
+
+        </div>
 
     </main>
 
     <footer></footer>
- <script src="js/scrip.js"></script>   
+    <script src="js/scrip.js"></script>   
 </body>
 </html>
