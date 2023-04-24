@@ -173,6 +173,21 @@ const montoSeleccionado = document.getElementById('monto_seleccionado');
 const cuotasSeleccionadas = document.getElementById('cuotas_seleccionadas');
 const resultadoDiv2 = document.getElementById('resultado2');
 
+const botonVolver = document.createElement('button');
+botonVolver.innerText = 'Volver';
+botonVolver.addEventListener('click', () => {
+  formulario2.style.display = 'none';
+  formulario.style.display = 'block';
+  resultadoDiv2.innerHTML = '';
+});
+
+const botonOtraSimulacion = document.createElement('button');
+botonOtraSimulacion.innerText = 'Realizar otra simulación';
+botonOtraSimulacion.addEventListener('click', () => {
+  formulario2.style.display = 'block';
+  resultadoDiv2.innerHTML = '';
+});
+
 formulario.addEventListener('submit', (event) => {
   event.preventDefault();
   
@@ -186,8 +201,8 @@ formulario.addEventListener('submit', (event) => {
     if (sueldo < 45000) {
       resultadoDiv.innerHTML = "Disculpe, a montos menores a $45,000 no se puede otorgar un préstamo.";
     } else if (sueldo >= 45000 && sueldo < 100000) {
-      formulario.style.display = 'none'; // Ocultar el primer formulario
-      formulario2.style.display = 'block'; // Mostrar el segundo formulario
+      formulario.style.display = 'none';
+      formulario2.style.display = 'block';
     }
   }
 });
@@ -197,9 +212,12 @@ formulario2.addEventListener('submit', (event) => {
   
   const monto = montoSeleccionado.value;
   const cuotas = cuotasSeleccionadas.value;
-  const interes = 1.1; // Tasa de interés fija del 10% por cada cuota
+  const interes = 1.1;
 
   const cuota = (monto * interes) / cuotas;
   
   resultadoDiv2.innerHTML = `Para un préstamo de $${monto} en ${cuotas} cuotas, cada cuota será de $${cuota.toFixed(2)}.`;
+
+  formulario2.appendChild(botonVolver);
+  formulario2.appendChild(botonOtraSimulacion);
 });
