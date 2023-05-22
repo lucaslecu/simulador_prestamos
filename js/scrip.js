@@ -1,88 +1,86 @@
-function Cliente(nombre, apellido, dni, celular, email) {
-  this.nombre = nombre;
-  this.apellido = apellido;
-  this.dni = dni;
-  this.celular = celular;
-  this.email = email;
-}
+document.getElementById('formulario-datos').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const sueldo = parseInt(document.getElementById('sueldo').value);
+  const trabajo = document.getElementById('trabajo').value;
+  const resultadoDiv = document.getElementById('resultado');
+  resultadoDiv.innerHTML = '';
 
-
-const formulario = document.getElementById('formulario');
-const resultadoDiv = document.getElementById('resultado');
-const formulario2 = document.getElementById('formulario2');
-const formulario3 = document.getElementById('formulario3');
-const formulario4 = document.getElementById('formulario4');
-
-const montoSeleccionado = document.getElementById('monto_seleccionado');
-const cuotasSeleccionadas = document.getElementById('cuotas_seleccionadas');
-const resultadoDiv2 = document.getElementById('resultado2');
-
-const botonVolver = document.createElement('button');
-botonVolver.innerText = 'Volver';
-botonVolver.addEventListener('click', () => {
-formulario2.style.display = 'none';
-formulario.style.display = 'block';
-resultadoDiv2.innerHTML = '';
-});
-
-const botonOtraSimulacion = document.createElement('button');
-botonOtraSimulacion.innerText = 'Realizar otra simulación';
-botonOtraSimulacion.addEventListener('click', () => {
-formulario2.style.display = 'block';
-resultadoDiv2.innerHTML = '';
-});
-
-formulario.addEventListener('submit', (event) => {
-event.preventDefault();
-
-const trabajo = document.getElementById('trabajo').value;
-const empresa = document.getElementById('empresa').value;
-const sueldo = document.getElementById('sueldo').value;
-
-if(trabajo === "no") {
-  resultadoDiv.innerHTML = "Lo siento, no se le puede otorgar el préstamo.";
-} else {
   if (sueldo < 45000) {
-    resultadoDiv.innerHTML = "Disculpe, a montos menores a $45,000 no se puede otorgar un préstamo.";
-  } else if (sueldo >= 45000 && sueldo < 100000) {
-    formulario.style.display = 'none';
-    formulario2.style.display = 'block';
-    formulario2.addEventListener('submit', (event) => {
-      event.preventDefault();
-      
-      const monto = montoSeleccionado.value;
-      const cuotas = cuotasSeleccionadas.value;
-      const interes = 1.1;
-    
-      const cuota = (monto * interes) / cuotas;
-      
-      resultadoDiv2.innerHTML = `Para un préstamo de $${monto} en ${cuotas} cuotas, cada cuota será de $${cuota.toFixed(2)}.`;
-    
-      formulario2.appendChild(botonVolver);
-      formulario2.appendChild(botonOtraSimulacion);
-      formulario3.appendChild(botonaceptarprestamo);
-    });
-    }
+      resultadoDiv.innerHTML = 'Lo sentimos, no se puede otorgar un préstamo con ese sueldo.';
+      return;
+  }
 
-    else if (sueldo >= 100000 && sueldo < 1000000) {
-      formulario.style.display = 'none';
-      
-      formulario3.style.display = 'block';
-      formulario3.addEventListener('submit', (event) => {
-        event.preventDefault();
-        
-        const monto = montoSeleccionado.value;
-        const cuotas = cuotasSeleccionadas.value;
-        const interes = 1.1;
-      
-        const cuota = (monto * interes) / cuotas;
-        
-        resultadoDiv2.innerHTML = `Para un préstamo de $${monto} en ${cuotas} cuotas, cada cuota será de $${cuota.toFixed(2)}.`;
-      
-        formulario2.appendChild(botonVolver);
-        formulario2.appendChild(botonOtraSimulacion);
-      });
-      }
+  let montoMaximo;
+  let interesPorcentaje;
 
-}
+  if (sueldo <= 100000) {
+      montoMaximo = 200000;
+      interesPorcentaje = 15;
+  } else if (sueldo <= 1000000) {
+      montoMaximo = 1000000;
+      interesPorcentaje = 30;
+  }
+
+  resultadoDiv.innerHTML = `Felicitaciones, puede obtener un préstamo de hasta ${montoMaximo.toLocaleString()} pesos.<br>`;
+  resultadoDiv.innerHTML += 'Seleccione el monto y las cuotas para continuar.';
+  document.getElementById('formulario').style.display = 'none';
+  document.getElementById('formulario2').style.display = 'block';
+  document.getElementById('adquirir-prestamo').style.display = 'none';
+});
+
+document.getElementById('formulario-monto-cuotas').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const montoSeleccionado = parseInt(document.getElementById('monto_seleccionado').value);
+  const cuotasSeleccionadas = parseInt(document.getElementById('cuotas_seleccionadas').value);
+  const resultadoDiv = document.getElementById('resultado2');
+  resultadoDiv.innerHTML = '';
+
+  const interesPorcentaje = 15;
+  const interesAnual = montoSeleccionado * (interesPorcentaje / 100);
+  const montoTotal = montoSeleccionado + interesAnual;
+  const cuotaMensual = montoTotal / cuotasSeleccionadas;
+
+  resultadoDiv.innerHTML = `Su préstamo es de ${montoSeleccionado.toLocaleString()} pesos en ${cuotasSeleccionadas} cuotas de ${cuotaMensual.toLocaleString()} pesos mensuales.`;
+  document.getElementById('adquirir-prestamo').style.display = 'block';
+});
+
+document.getElementById('formulario-monto-cuotas2').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const montoSeleccionado = parseInt(document.getElementById('monto_seleccionado_2').value);
+  const cuotasSeleccionadas = parseInt(document.getElementById('cuotas_seleccionadas_2').value);
+  const resultadoDiv = document.getElementById('resultado3');
+  resultadoDiv.innerHTML = '';
+
+  const interesPorcentaje = 30;
+  const interesAnual = montoSeleccionado * (interesPorcentaje / 100);
+  const montoTotal = montoSeleccionado + interesAnual;
+  const cuotaMensual = montoTotal / cuotasSeleccionadas;
+
+  resultadoDiv.innerHTML = `Su préstamo es de ${montoSeleccionado.toLocaleString()} pesos en ${cuotasSeleccionadas} cuotas de ${cuotaMensual.toLocaleString()} pesos mensuales.`;
+  document.getElementById('adquirir-prestamo-2').style.display = 'block';
+});
+
+document.getElementById('adquirir-prestamo').addEventListener('click', function() {
+  document.getElementById('formulario2').style.display = 'none';
+  document.getElementById('formulario4').style.display = 'block';
+});
+
+document.getElementById('adquirir-prestamo-2').addEventListener('click', function() {
+  document.getElementById('formulario3').style.display = 'none';
+  document.getElementById('formulario4').style.display = 'block';
+});
+
+document.getElementById('formulario-datos-personales').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const nombre = document.getElementById('nombre').value;
+  const apellido = document.getElementById('apellido').value;
+  const dni = document.getElementById('dni').value;
+  const telefono = document.getElementById('telefono').value;
+  const email = document.getElementById('email').value;
+
+  const mensajeEnviadoDiv = document.getElementById('mensaje-enviado');
+  mensajeEnviadoDiv.innerHTML = `<h2>¡Gracias por su solicitud, ${nombre}!</h2>`;
+  mensajeEnviadoDiv.innerHTML += `<p>Nos pondremos en contacto con usted a través de ${email} o al teléfono ${telefono} a la brevedad.</p>`;
+  document.getElementById('formulario4').style.display = 'none';
+  mensajeEnviadoDiv.style.display = 'block';
 });
