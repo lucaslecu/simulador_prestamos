@@ -1,3 +1,17 @@
+document.addEventListener('DOMContentLoaded', obtenerValorDolar);
+
+function obtenerValorDolar() {
+  fetch('https://api.exchangerate-api.com/v4/latest/USD')
+    .then(response => response.json())
+    .then(data => {
+      const valorDolarEnPesos = data.rates.ARS;
+      const dolarDiv = document.getElementById('valor-dolar');
+      dolarDiv.innerHTML = `Valor del dólar: ${valorDolarEnPesos.toFixed(2)} pesos`;
+    })
+    .catch(error => {
+      console.error('Error al obtener el valor del dólar:', error);
+    });
+}
 document.getElementById('formulario-datos').addEventListener('submit', function(e) {
   e.preventDefault();
   const sueldo = parseInt(document.getElementById('sueldo').value);
