@@ -42,6 +42,10 @@ document.getElementById('formulario-monto-cuotas').addEventListener('submit', fu
 
   resultadoDiv.innerHTML = `Su préstamo es de ${montoSeleccionado.toLocaleString()} pesos en ${cuotasSeleccionadas} cuotas de ${cuotaMensual.toLocaleString()} pesos mensuales.`;
   document.getElementById('adquirir-prestamo').style.display = 'block';
+
+  // almacenamiento local
+  localStorage.setItem('montoSeleccionado', montoSeleccionado);
+  localStorage.setItem('cuotasSeleccionadas', cuotasSeleccionadas);
 });
 
 document.getElementById('formulario-monto-cuotas2').addEventListener('submit', function(e) {
@@ -58,6 +62,10 @@ document.getElementById('formulario-monto-cuotas2').addEventListener('submit', f
 
   resultadoDiv.innerHTML = `Su préstamo es de ${montoSeleccionado.toLocaleString()} pesos en ${cuotasSeleccionadas} cuotas de ${cuotaMensual.toLocaleString()} pesos mensuales.`;
   document.getElementById('adquirir-prestamo-2').style.display = 'block';
+
+  // almacenamiento local
+  localStorage.setItem('montoSeleccionado', montoSeleccionado);
+  localStorage.setItem('cuotasSeleccionadas', cuotasSeleccionadas);
 });
 
 document.getElementById('adquirir-prestamo').addEventListener('click', function() {
@@ -83,4 +91,12 @@ document.getElementById('formulario-datos-personales').addEventListener('submit'
   mensajeEnviadoDiv.innerHTML += `<p>Nos pondremos en contacto con usted a través de ${email} o al teléfono ${telefono} a la brevedad.</p>`;
   document.getElementById('formulario4').style.display = 'none';
   mensajeEnviadoDiv.style.display = 'block';
+
+  // almacenamiento local
+  localStorage.setItem('nombre', nombre);
+  localStorage.setItem('apellido', apellido);
+  localStorage.setItem('dni', dni);
+  localStorage.setItem('telefono', telefono);
+  localStorage.setItem('email', email);
 });
+
